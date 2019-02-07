@@ -5,13 +5,14 @@ module Mutations
     argument :description, String, required: true
     argument :url, String, required: true
 
-    type Types::LinkType
+    field :link, Types::LinkType, null: false
 
     def resolve(description: nil, url: nil)
-      Link.create!(
+      link =  Link.create!(
         description: description,
         url: url,
       )
+      { link: link }
     end
   end
 end
